@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".RegistrationAndSlash.Sign_inFragment">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#293859">
+
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardview"
+            android:layout_width="match_parent"
+            android:layout_height="270dp"
+            android:layout_marginTop="-22dp"
+            android:background="@color/white"
+            android:elevation="10dp"
+            app:cardCornerRadius="40dp"
+            app:cardPreventCornerOverlap="false">
+
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/viewpage1"
+                android:layout_width="954dp"
+                android:layout_height="270dp"
+                android:layout_below="@+id/tablay"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical">
+
+            </androidx.viewpager2.widget.ViewPager2>
+
+            <ImageView
+                android:layout_width="157dp"
+                android:layout_height="141dp"
+                android:layout_gravity="center"
+                android:layout_marginBottom="30dp"
+                android:src="@drawable/user"
+                app:tint="#e9e9e9" />
+
+            <TextView
+
+                android:id="@+id/tvb1"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="150dp"
+                android:layout_marginTop="180dp"
+                android:hint="Welcome"
+                android:textColor="#686868"
+
+                android:textSize="25dp" />
+
+            <TextView
+                android:id="@+id/tvs1"
+                android:layout_width="280dp"
+                android:layout_height="42dp"
+                android:layout_marginStart="80dp"
+                android:layout_marginTop="210dp"
+                android:hint="Log in to your account to get an update"
+                android:textColor="#d0d0d0" />
+
+
+        </androidx.cardview.widget.CardView>
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tablay"
+            android:layout_below="@+id/cardview"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            app:tabGravity="fill"
+            app:tabTextColor="@color/white"
+            android:background="#293859"
+            app:tabIndicatorColor="#ffd04a"
+            app:tabIndicatorHeight="3dp"
+            app:tabMode="fixed">
+        </com.google.android.material.tabs.TabLayout>
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/viewpage2"
+            android:layout_below="@+id/tablay"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </androidx.viewpager2.widget.ViewPager2>
+    </RelativeLayout>
+
+
+</LinearLayout>

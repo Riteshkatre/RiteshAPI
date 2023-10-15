@@ -1,0 +1,16 @@
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_checked="true">
+        <shape android:shape="rectangle">
+            <size android:width="48dp" android:height="24dp" />
+            <solid android:color="#00FF00"/> <!-- Green color for checked state -->
+            <corners android:radius="12dp" />
+        </shape>
+    </item>
+    <item android:state_checked="false">
+        <shape android:shape="rectangle">
+            <size android:width="48dp" android:height="24dp" />
+            <solid android:color="#FF0000"/> <!-- Red color for unchecked state -->
+            <corners android:radius="12dp" />
+        </shape>
+    </item>
+</selector>

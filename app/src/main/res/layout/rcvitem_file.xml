@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="125dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="20dp"
+        android:backgroundTint="#6726DC"
+        android:elevation="10dp"
+        app:cardCornerRadius="10dp">
+
+        <TextView
+            android:id="@+id/itemtextview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:textColor="@color/white"
+            android:textSize="20dp" />
+
+        <TextView
+            android:id="@+id/itemtextview1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="50dp"
+
+            android:textColor="@color/white"
+            android:textSize="20dp" />
+
+        <TextView
+            android:id="@+id/itemtextview2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="80dp"
+
+            android:textColor="@color/white"
+            android:textSize="20dp" />
+        <ImageView
+            android:id="@+id/editimage"
+            android:layout_width="40dp"
+            android:layout_height="50dp"
+            android:layout_gravity="end"
+
+            android:src="@drawable/baseline_mode_edit_24"/>
+
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/btnswitch"
+            android:layout_width="64dp"
+            android:layout_height="70dp"
+            android:layout_gravity="bottom"
+            android:backgroundTint="@color/white"
+            android:layout_marginLeft="250dp" />
+        <ImageView
+            android:id="@+id/deleteimage"
+            android:layout_width="40dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="230dp"
+            android:src="@drawable/baseline_delete_forever_24"/>
+    </androidx.cardview.widget.CardView>
+
+</LinearLayout>

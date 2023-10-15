@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+
+    <queries>
+        <intent>
+            <action android:name="android.media.action.IMAGE_CAPTURE" />
+        </intent>
+    </queries>
+
+    <application
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.RiteshAPI"
+        android:usesCleartextTraffic="true"
+        android:windowSoftInputMode="adjustResize"
+        tools:targetApi="31">
+        <activity
+            android:name=".Catelog.CatelogActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Product.ProductListActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Product.ProductAddActivity"
+            android:exported="false" />
+        <activity
+            android:name=".RegistrationAndSlash.RegistrationActivity"
+            android:exported="true"
+            android:label="@string/title_activity_registration"
+            android:theme="@style/Theme.RiteshAPI" />
+        <activity
+            android:name=".RegistrationAndSlash.SlashScreenActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".SubCategory.EditSubCategoryActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SubCategory.SubCategoryAddActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SubCategory.SubCategoryActivity"
+            android:exported="false" />
+        <activity
+            android:name=".HomePageActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Category.EditCategoryActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Category.ResultActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Category.MainActivity"
+            android:exported="false" />
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.example.riteshapi"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/files" />
+        </provider>
+    </application>
+
+</manifest>
