@@ -37,16 +37,17 @@ import rx.schedulers.Schedulers;
 
 public class ProductListActivity extends AppCompatActivity {
 
-    AppCompatSpinner categorySpinnerProduct,subCategorySpinnerProduct;
+    AppCompatSpinner categorySpinnerProduct, subCategorySpinnerProduct;
     EditText etvProductSearch;
     LinearLayout noDataFoundView;
     RecyclerView productRecyclerView;
     FloatingActionButton btnAddProduct;
     RestCall restCall;
-  SharedPreference sharedPreference;
-   ProductListAdapter productListAdapter;
+    SharedPreference sharedPreference;
+    ProductListAdapter productListAdapter;
+    String productId;
     int selectedPos = 0;
-    String selectedCategoryId, selectedCategoryName,selectedSubCategoryId, selectedSubCategoryName,product_id;
+    String selectedCategoryId, selectedCategoryName, selectedSubCategoryId, selectedSubCategoryName, product_id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,7 +86,7 @@ public class ProductListActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                productListAdapter.Search(charSequence,productRecyclerView);
+                productListAdapter.Search(charSequence, productRecyclerView);
 
             }
 
@@ -103,14 +104,10 @@ public class ProductListActivity extends AppCompatActivity {
     }
 
 
-
-
     private void getProductCateCall() {
 
-        noDataFoundView.setVisibility(View.VISIBLE);
 
-
-        restCall.getCategory("getCategory",sharedPreference.getStringvalue("user_id"))
+        restCall.getCategory("getCategory", sharedPreference.getStringvalue("user_id"))
                 .subscribeOn(Schedulers.io())
                 .observeOn(Schedulers.newThread())
                 .subscribe(new Subscriber<CategoryListResponce>() {
@@ -164,8 +161,7 @@ public class ProductListActivity extends AppCompatActivity {
 
                                                 if (selectedCategoryId.equalsIgnoreCase("-1")) {
                                                     Toast.makeText(ProductListActivity.this, "Select Category", Toast.LENGTH_SHORT).show();
-                                                }
-                                                else {
+                                                } else {
 //                                                    Toast.makeText(AddProductActivity.this, "SubCategory Loading", Toast.LENGTH_SHORT).show();
                                                     getProductSubCateCall();
                                                 }
@@ -182,11 +178,11 @@ public class ProductListActivity extends AppCompatActivity {
                         });
                     }
                 });
-        productListAdapter = new ProductListAdapter(new ArrayList<>(),ProductListActivity.this);
+        productListAdapter = new ProductListAdapter(new ArrayList<>(), ProductListActivity.this);
     }
 
     private void getProductSubCateCall() {
-        restCall.getSubCategory("getSubCategory",selectedCategoryId,sharedPreference.getStringvalue("user_id"))
+        restCall.getSubCategory("getSubCategory", selectedCategoryId, sharedPreference.getStringvalue("user_id"))
                 .subscribeOn(Schedulers.io())
                 .observeOn(Schedulers.newThread())
                 .subscribe(new Subscriber<SubCategoryListResponce>() {
@@ -241,8 +237,7 @@ public class ProductListActivity extends AppCompatActivity {
 
                                                 if (selectedCategoryId.equalsIgnoreCase("-1") && selectedSubCategoryId.equalsIgnoreCase("-1")) {
                                                     Toast.makeText(ProductListActivity.this, "Select Sub Category", Toast.LENGTH_SHORT).show();
-                                                }
-                                                else {
+                                                } else {
                                                     getProduct();
 //                                                    Toast.makeText(AddProductActivity.this, "SubCategory Loading", Toast.LENGTH_SHORT).show();
                                                 }
@@ -260,19 +255,12 @@ public class ProductListActivity extends AppCompatActivity {
                         });
                     }
                 });
-        productListAdapter = new ProductListAdapter( new ArrayList<>(),ProductListActivity.this);
+        productListAdapter = new ProductListAdapter(new ArrayList<>(), ProductListActivity.this);
     }
 
-    private void getProduct(){
-        if (selectedCategoryId.equalsIgnoreCase("-1") || selectedSubCategoryId.equalsIgnoreCase("-1")) {
-            productRecyclerView.setVisibility(View.GONE);
-            noDataFoundView.setVisibility(View.VISIBLE);
-        } else {
-            productRecyclerView.setVisibility(View.VISIBLE);
-            noDataFoundView.setVisibility(View.GONE);
+    private void getProduct() {
 
-        }
-        restCall.getProduct("getProduct",selectedCategoryId,selectedSubCategoryId,sharedPreference.getStringvalue("user_id"))
+        restCall.getProduct("getProduct", selectedCategoryId, selectedSubCategoryId, sharedPreference.getStringvalue("user_id"))
                 .subscribeOn(Schedulers.io())
                 .observeOn(Schedulers.newThread())
                 .subscribe(new Subscriber<ProductListResponce>() {
@@ -297,17 +285,37 @@ public class ProductListActivity extends AppCompatActivity {
                             @Override
                             public void run() {
                                 if (productListResponse.getStatus().equalsIgnoreCase(VeriableBag.SUCCESS_CODE)
-                                        && productListResponse.getProductList() != null && productListResponse.getProductList().size() > 0){
+                                        && productListResponse.getProductList() != null && productListResponse.getProductList().size() > 0) {
+
 
                                     LinearLayoutManager layoutManager = new LinearLayoutManager(ProductListActivity.this);
                                     productRecyclerView.setLayoutManager(layoutManager);
 
-                                    productListAdapter = new ProductListAdapter(productListResponse.getProductList(),ProductListActivity.this);
+                                    productListAdapter = new ProductListAdapter(productListResponse.getProductList(), ProductListActivity.this);
                                     productRecyclerView.setAdapter(productListAdapter);
                                     productListAdapter.SetUpInterface(new ProductListAdapter.ProductClick() {
                                         @Override
                                         public void DeleteClick(ProductListResponce.Product product) {
-                                            DataDeleteClick(product);
+                                            String productId = product.getProductId();
+
+                                            AlertDialog.Builder alertDialog = new AlertDialog.Builder(ProductListActivity.this);
+                                            alertDialog.setTitle("Alert!!");
+                                            alertDialog.setMessage("Are you sure, you want to delete " + productId +"->" + sharedPreference.getStringvalue("user_id"));
+                                            alertDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                                @Override
+                                                public void onClick(DialogInterface dialogInterface, int i) {
+                                                    DeleteProductCall(productId);
+                                                    dialogInterface.dismiss();
+                                                }
+                                            });
+                                            alertDialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                                @Override
+                                                public void onClick(DialogInterface dialogInterface, int i) {
+                                                    dialogInterface.dismiss();
+                                                }
+                                            });
+                                            alertDialog.show();
+
                                         }
                                     });
 
@@ -317,8 +325,9 @@ public class ProductListActivity extends AppCompatActivity {
                     }
                 });
     }
-    public void DeleteProductCall() {
-        restCall.deleteProduct("DeleteProduct", product_id, sharedPreference.getStringvalue("user_id"))
+
+    public void DeleteProductCall(String productId) {
+        restCall.DeleteProduct("DeleteProduct", productId, sharedPreference.getStringvalue("user_id"))
                 .subscribeOn(Schedulers.io())
                 .observeOn((Schedulers.newThread()))
                 .subscribe(new Subscriber<CommonResponce>() {
@@ -340,38 +349,20 @@ public class ProductListActivity extends AppCompatActivity {
 
                     @Override
                     public void onNext(CommonResponce commonResponce) {
-                        if (commonResponce.getStatus().equalsIgnoreCase(VeriableBag.SUCCESS_CODE)){
-                            Toast.makeText(ProductListActivity.this,"product deleted ", Toast.LENGTH_SHORT).show();
-                        } else {
-                            Toast.makeText(ProductListActivity.this, "Faild to delete" + commonResponce.getMessage(), Toast.LENGTH_SHORT).show();
-                        }
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                if (commonResponce.getStatus().equalsIgnoreCase(VeriableBag.SUCCESS_CODE)) {
+                                    Toast.makeText(ProductListActivity.this, "product deleted ", Toast.LENGTH_SHORT).show();
+                                } else {
+                                    Toast.makeText(ProductListActivity.this, "Faild to delete" + commonResponce.getMessage(), Toast.LENGTH_SHORT).show();
+                                }
+
+                            }
+                        });
+
                     }
                 });
     }
-
-
-
-    public void DataDeleteClick(ProductListResponce.Product product) {
-        AlertDialog.Builder alertDialog = new AlertDialog.Builder(ProductListActivity.this);
-        alertDialog.setTitle("Alert!!");
-        alertDialog.setMessage("Are you sure, you want to delete " + product.getProductId() + sharedPreference.getStringvalue("user_id"));
-        alertDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                DeleteProductCall();
-                dialogInterface.dismiss();
-            }
-        });
-        alertDialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                dialogInterface.dismiss();
-            }
-        });
-        alertDialog.show();
-    }
-
-
-
 
 }

@@ -187,7 +187,7 @@ public class ProductAddActivity extends AppCompatActivity {
             try {
                 StrictMode.VmPolicy.Builder builder2 = new StrictMode.VmPolicy.Builder();
                 StrictMode.setVmPolicy(builder2.build());
-                File file = new File(currentPhotoPath);
+                    File file = new File(currentPhotoPath);
                 RequestBody requestBody = RequestBody.create(okhttp3.MediaType.parse("multipart/form-data"), file);
                 fileToUploadfile = MultipartBody.Part.createFormData("product_image", file.getName(), requestBody);
 
@@ -395,6 +395,43 @@ public class ProductAddActivity extends AppCompatActivity {
                     }
                 });
 
+    }
+
+
+    public  void  EditProduct(String categoryId,String subCategoryId,String productId,String productName,
+                              String productPrice,String oldImageProduct,String productDesc,String isVeg,String productImage){
+
+        restCall.EditProduct("EditProduct",categoryId,subCategoryId,productId,productName,productPrice,oldImageProduct,productDesc,isVeg,productImage,sharedPreference.getStringvalue("user_id"))
+                .subscribeOn(Schedulers.io())
+                .observeOn(Schedulers.newThread())
+                .subscribe(new Subscriber<CommonResponce>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+
+                            }
+                        });
+
+                    }
+
+                    @Override
+                    public void onNext(CommonResponce commonResponce) {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+
+                            }
+                        });
+
+                    }
+                });
     }
 
 

@@ -132,9 +132,24 @@ public interface RestCall {
 
     @FormUrlEncoded
     @POST("ProductController.php")
-    Single<CommonResponce>deleteProduct(
+    Single<CommonResponce>DeleteProduct(
             @Field("tag") String tag,
             @Field("product_id") String product_id,
+            @Field("user_id") String user_id);
+
+    @FormUrlEncoded
+    @POST("ProductController.php")
+    Single<CommonResponce>EditProduct(
+            @Field("tag") String tag,
+            @Field("category_id") String category_id,
+            @Field("sub_category_id") String sub_category_id,
+            @Field("product_id") String product_id,
+            @Field("product_name") String product_name,
+            @Field("product_price") String product_price,
+            @Field("old_product_image") String old_product_image,
+            @Field("product_desc") String product_desc,
+            @Field("is_veg") String is_veg,
+            @Field("product_image") String product_image,
             @Field("user_id") String user_id);
 
 
