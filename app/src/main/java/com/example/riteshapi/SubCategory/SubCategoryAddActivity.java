@@ -37,7 +37,7 @@ public class SubCategoryAddActivity extends AppCompatActivity {
     SharedPreference sharedPreference;
 
     int selectedPos = 0;
-    boolean isEdit = false;
+    boolean isEdit ;
 
 
     @Override

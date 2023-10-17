@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:background="#d6d7d7"
+    android:layout_margin="10dp"
+    android:padding="16dp">
+
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+
+        <ImageView
+            android:id="@+id/img_productt"
+            android:layout_width="240dp"
+            android:layout_height="130dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_imageholder" />
+
+
+        <ImageView
+            android:id="@+id/vegNonVegIcon"
+            android:layout_width="30dp"
+            android:layout_height="34dp"
+            android:visibility="visible"
+            android:src="@drawable/images"/>
+
+
+        <TextView
+            android:id="@+id/ProductNameTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Chocolates"
+            android:textSize="18sp"
+            android:textColor="@color/black"
+            android:layout_marginTop="8dp"
+            android:gravity="start"
+            />
+
+
+        <TextView
+            android:id="@+id/ProductDescTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Product Description"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            android:gravity="start"
+            />
+
+
+
+        <TextView
+            android:id="@+id/ProductPriceTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Price: "
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:gravity="start"
+            />
+
+
+        <TextView
+            android:id="@+id/textViewPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="250"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            android:gravity="start"
+            />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="end">
+
+
+        <ImageButton
+            android:id="@+id/btn_product_edit"
+            android:layout_width="70dp"
+            android:layout_height="75dp"
+            android:src="@drawable/baseline_mode_edit_24" />
+
+        <ImageButton
+            android:id="@+id/btn_product_delete"
+            android:layout_width="70dp"
+            android:layout_height="96dp"
+            android:layout_marginTop="16dp"
+            android:src="@drawable/baseline_delete_forever_24" />
+    </LinearLayout>
+</LinearLayout>

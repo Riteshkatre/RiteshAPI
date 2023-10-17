@@ -1,5 +1,6 @@
 package com.example.riteshapi.Network;
 
+import com.example.riteshapi.NetworkResponce.CatalogueListResponse;
 import com.example.riteshapi.NetworkResponce.CategoryListResponce;
 import com.example.riteshapi.NetworkResponce.CommonResponce;
 import com.example.riteshapi.NetworkResponce.CommonSubCategoryResponce;
@@ -108,49 +109,57 @@ public interface RestCall {
 
     @Multipart
     @POST("ProductController.php")
-    Single<CommonResponce> AddProduct(
-            @Part("tag") RequestBody tag,
-            @Part("category_id") RequestBody category_id,
-            @Part("sub_category_id") RequestBody sub_category_id,
-            @Part("product_name") RequestBody product_name,
-            @Part MultipartBody.Part product_image,
-            @Part("product_price") RequestBody product_price,
-            @Part("product_desc") RequestBody product_desc,
-            @Part("is_veg") RequestBody is_veg,
-            @Part("user_id") RequestBody user_id);
+    Single<CommonResponce>AddProduct(
+            @Part("tag")RequestBody tag,
+            @Part("category_id")RequestBody category_id,
+            @Part("sub_category_id")RequestBody sub_category_id,
+            @Part("product_name")RequestBody product_name,
+            @Part("product_price")RequestBody product_price,
+            @Part("product_desc")RequestBody product_desc,
+            @Part("is_veg")RequestBody is_veg,
+            @Part("user_id")RequestBody user_id,
+            @Part MultipartBody.Part product_image);
 
 
 
     @FormUrlEncoded
     @POST("ProductController.php")
-    Single<ProductListResponce> getProduct(
+    Single<ProductListResponce> GetProduct(
             @Field("tag") String tag,
             @Field("category_id") String category_id,
             @Field("sub_category_id") String sub_category_id,
-            @Field("user_id") String user_id);
+            @Field("user_id") String user_id
+    );
 
 
     @FormUrlEncoded
     @POST("ProductController.php")
-    Single<CommonResponce>DeleteProduct(
+    Single<CommonResponce> DeleteProduct(
             @Field("tag") String tag,
             @Field("product_id") String product_id,
-            @Field("user_id") String user_id);
+            @Field("user_id") String user_id
+    );
+    @FormUrlEncoded
+    @POST("ProductController.php")
+    Single<CatalogueListResponse> GetCatalog(
+            @Field("tag") String tag,
+            @Field("user_id") String user_id
+    );
+
 
     @FormUrlEncoded
     @POST("ProductController.php")
-    Single<CommonResponce>EditProduct(
+    Single<CommonResponce> EditProduct(
+
             @Field("tag") String tag,
             @Field("category_id") String category_id,
             @Field("sub_category_id") String sub_category_id,
-            @Field("product_id") String product_id,
-            @Field("product_name") String product_name,
+            @Field("product_id") String  product_id,
+            @Field("product_name") String  product_name,
             @Field("product_price") String product_price,
             @Field("old_product_image") String old_product_image,
             @Field("product_desc") String product_desc,
-            @Field("is_veg") String is_veg,
-            @Field("product_image") String product_image,
-            @Field("user_id") String user_id);
-
-
+            @Field("is_veg") String  is_veg,
+            @Field("user_id") String user_id,
+            @Field  ("product_image") String product_image );
 }

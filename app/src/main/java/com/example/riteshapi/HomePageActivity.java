@@ -8,13 +8,12 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.riteshapi.Product.ProductAddActivity;
-import com.example.riteshapi.Product.ProductListActivity;
+import com.example.riteshapi.Category.ResultActivity;
+import com.example.riteshapi.Catelog.CatelogActivity;
+import com.example.riteshapi.Product.ProductAct;
 import com.example.riteshapi.RegistrationAndSlash.RegistrationActivity;
 import com.example.riteshapi.RegistrationAndSlash.SharedPreference;
 import com.example.riteshapi.SubCategory.SubCategoryActivity;
-
-import com.example.riteshapi.Category.ResultActivity;
 
 public class HomePageActivity extends AppCompatActivity {
     Button category, subcategory,productadd,productlist;
@@ -56,7 +55,7 @@ public class HomePageActivity extends AppCompatActivity {
         productadd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(HomePageActivity.this, ProductAddActivity.class);
+                Intent intent = new Intent(HomePageActivity.this, CatelogActivity.class);
                 startActivity(intent);
 
 
@@ -82,7 +81,7 @@ public class HomePageActivity extends AppCompatActivity {
         productlist.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(HomePageActivity.this, ProductListActivity.class);
+                Intent intent = new Intent(HomePageActivity.this, ProductAct.class);
                 startActivity(intent);
 
             }

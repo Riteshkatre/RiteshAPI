@@ -141,6 +141,8 @@ public class ProductListResponce implements Serializable
         public void setIsVeg(String isVeg) {
             this.isVeg = isVeg;
         }
+
+
     }
 
 }
