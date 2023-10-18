@@ -81,7 +81,6 @@ public class AddProductActivity extends AppCompatActivity {
         btnSubmit = findViewById(R.id.btnSubmit);
         buttonCancel = findViewById(R.id.btnCancel);
         switchVegNonVeg = findViewById(R.id.switchbtn);
-
         preferenceManger= new SharedPreference(this);
         user_id = preferenceManger.getStringvalue("user_id");
 
@@ -123,7 +122,6 @@ public class AddProductActivity extends AppCompatActivity {
                 categoryID = ((Intent) intent).getExtras().getString("category_Id");
                 subCategoryID = ((Intent) intent).getExtras().getString("subCat_id");
 
-
                 if(editTextName.getText().toString().equalsIgnoreCase("")){
                     editTextName.setError("Enter the name");
                     editTextName.requestFocus();
@@ -135,7 +133,6 @@ public class AddProductActivity extends AppCompatActivity {
                     editTextDesc.requestFocus();
                 }else {
                     restCall = RestClient.createService(RestCall.class, VeriableBag.BASE_URL, VeriableBag.API_KEY);
-
 
                     if(isEditMode == true){
                         ProductEdit();
@@ -237,6 +234,7 @@ public class AddProductActivity extends AppCompatActivity {
                                     editTextName.setText("");
                                     editTextPrice.setText("");
                                     editTextDesc.setText("");
+
                                     finish();
                                 }else{
                                     Toast.makeText(AddProductActivity.this, commonResponse.getMessage(), Toast.LENGTH_SHORT).show();
@@ -249,6 +247,8 @@ public class AddProductActivity extends AppCompatActivity {
 
 
     public  void ProductEdit(){
+        productImage = currentPhotoPath;
+
 
         restCall.EditProduct("EditProduct",categoryID,subCategoryID,productId,editTextName.getText().toString(),
                         editTextPrice.getText().toString(),productOldImage,editTextDesc.getText().toString()

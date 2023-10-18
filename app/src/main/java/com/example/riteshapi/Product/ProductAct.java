@@ -26,6 +26,7 @@ import com.example.riteshapi.NetworkResponce.ProductListResponce;
 import com.example.riteshapi.NetworkResponce.SubCategoryListResponce;
 import com.example.riteshapi.R;
 import com.example.riteshapi.RegistrationAndSlash.SharedPreference;
+import com.example.riteshapi.Tools;
 import com.example.riteshapi.Variablebags.VeriableBag;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -46,6 +47,7 @@ public class ProductAct extends AppCompatActivity {
     ProductAdapter productAdapter;
     SharedPreference preferenceManger;
     String user_id, category_Id, subCat_id, product_id;
+    Tools tools;
 
     List<String> sub_Category_name, sub_Category_id, category_id, categoryNames;
 
@@ -322,26 +324,28 @@ public class ProductAct extends AppCompatActivity {
                                             product_id = product.getProductId();
 
 
-                                                    AlertDialog.Builder alertDialog = new AlertDialog.Builder(ProductAct.this);
-                                                    alertDialog.setTitle("Alert!!");
-                                                    alertDialog.setMessage("Are you sure, you want to delete " + product_id +"->" + preferenceManger.getStringvalue("user_id"));
-                                                    alertDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                                                        @Override
-                                                        public void onClick(DialogInterface dialogInterface, int i) {
-                                                            deleteProduct(product_id);
-                                                            dialogInterface.dismiss();
-                                                        }
-                                                    });
-                                                    alertDialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
-                                                        @Override
-                                                        public void onClick(DialogInterface dialogInterface, int i) {
-                                                            dialogInterface.dismiss();
-                                                        }
-                                                    });
-                                                    alertDialog.show();
+                                            AlertDialog.Builder alertDialog = new AlertDialog.Builder(ProductAct.this);
+                                            alertDialog.setTitle("Alert!!");
+                                            alertDialog.setMessage("Are you sure, you want to delete " + product_id +"->" + preferenceManger.getStringvalue("user_id"));
+                                            alertDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                                @Override
+                                                public void onClick(DialogInterface dialogInterface, int i) {
+
+                                                    deleteProduct(product_id);
+
+                                                    dialogInterface.dismiss();
+                                                }
+                                            });
+                                            alertDialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                                @Override
+                                                public void onClick(DialogInterface dialogInterface, int i) {
+                                                    dialogInterface.dismiss();
+                                                }
+                                            });
+                                            alertDialog.show();
 
 
-                                            }
+                                        }
 
 
                                     });
@@ -359,6 +363,7 @@ public class ProductAct extends AppCompatActivity {
 
 
     public void deleteProduct(String productId) {
+
         restCall.DeleteProduct("DeleteProduct", productId, user_id)
                 .subscribeOn(Schedulers.io())
                 .observeOn(Schedulers.newThread())

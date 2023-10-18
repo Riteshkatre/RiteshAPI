@@ -33,7 +33,7 @@ public class SubCategoryAddActivity extends AppCompatActivity {
     Button btnaddsubdata;
     AppCompatSpinner spinneradd;
 
-    String selectedCategoryId,selectedCategoryName,selectedSubCategoryId, subcategory_name, category_id;
+    String selectedCategoryId,selectedSubCategoryId, subcategory_name, category_id;
     SharedPreference sharedPreference;
 
     int selectedPos = 0;

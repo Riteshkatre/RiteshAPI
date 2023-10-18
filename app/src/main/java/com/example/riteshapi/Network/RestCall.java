@@ -1,6 +1,6 @@
 package com.example.riteshapi.Network;
 
-import com.example.riteshapi.NetworkResponce.CatalogueListResponse;
+import com.example.riteshapi.Catelog.NetworkResponce.CatalogueListResponse;
 import com.example.riteshapi.NetworkResponce.CategoryListResponce;
 import com.example.riteshapi.NetworkResponce.CommonResponce;
 import com.example.riteshapi.NetworkResponce.CommonSubCategoryResponce;
@@ -65,6 +65,7 @@ public interface RestCall {
             @Field("category_id") String category_id,
             @Field("user_id") String user_id);
 
+
     @FormUrlEncoded
     @POST("SubCategoryController.php")
     Single<CommonSubCategoryResponce> addSubCategory(
@@ -119,9 +120,6 @@ public interface RestCall {
             @Part("is_veg")RequestBody is_veg,
             @Part("user_id")RequestBody user_id,
             @Part MultipartBody.Part product_image);
-
-
-
     @FormUrlEncoded
     @POST("ProductController.php")
     Single<ProductListResponce> GetProduct(
