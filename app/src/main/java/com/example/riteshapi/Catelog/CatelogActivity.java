@@ -44,24 +44,11 @@ public class CatelogActivity extends AppCompatActivity {
         init();
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                getCatalogue();
-            }
-        }, 3000);
-    }
 
     private void init() {
 
        txtNoDataAvailable.setVisibility(View.VISIBLE);
         rcvcatelogcat.setVisibility(View.GONE);
-
-
-
         restCall = RestClient.createService(RestCall.class, VeriableBag.BASE_URL, VeriableBag.API_KEY);
         sharedPreference = new SharedPreference(CatelogActivity.this);
 

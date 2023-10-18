@@ -8,12 +8,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            app:cardCornerRadius="5dp"
-            app:cardElevation="2dp">
+
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -28,7 +23,7 @@
                     android:layout_marginTop="6dp"
                     android:layout_marginEnd="6dp"
                     android:text="Category Name"
-                    android:textSize="16dp"
+                    android:textSize="20dp"
                     android:textStyle="bold" />
 
                 <RelativeLayout
@@ -36,7 +31,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="12dp"
                     android:layout_marginBottom="2dp"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="5dp"
                     android:layout_marginEnd="12dp">
 
                     <TextView
@@ -45,26 +40,23 @@
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:text="subcategory"
-                        android:textSize="14dp" />
-
-
+                        android:textSize="17dp" />
 
                 </RelativeLayout>
+
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rvProductList"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="18dp"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="10dp"
                     android:layout_marginEnd="18dp"
-                    android:layout_marginBottom="6dp"
-                    android:visibility="gone"
-                    tools:listitem="@layout/item_product_list" />
+                    android:layout_marginBottom="6dp" />
 
             </LinearLayout>
 
-        </androidx.cardview.widget.CardView>
+
 
     </LinearLayout>
 

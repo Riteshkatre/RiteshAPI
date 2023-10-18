@@ -2,7 +2,6 @@ package com.example.riteshapi.Catelog;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.graphics.PorterDuff;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,17 +9,19 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.riteshapi.Catelog.NetworkResponce.ProductList;
 import com.example.riteshapi.R;
+import com.example.riteshapi.Tools;
 
 import java.util.List;
 
 public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.ViewHolder> {
     private final Context context;
     private final List<ProductList> productLists;
+    Tools tools;
 
     public ProductListAdapter(Context context, List<ProductList> productLists) {
         this.context = context;
@@ -37,23 +38,14 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
     @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        ProductList model = productLists.get(position);
+        ProductList productList = productLists.get(position);
+        holder.txtProductName.setText(productList.getProductName());
+        holder.txtProductPrice.setText( productList.getProductPrice());
+        holder.txtProductDescription.setText(productList.getProductDesc());
+        displayImage(holder.ivVegNonVeg.getContext(), holder.ivFoodImage, productList.getProductImage());
 
-        if (model.getIsVeg().equalsIgnoreCase("0")) {
-            // Tint the drawable to green
-            holder.ivVegNonVeg.setColorFilter(ContextCompat.getColor(context, R.color.green), PorterDuff.Mode.SRC_IN);
-        } else {
-            // Tint the drawable to red
-            holder.ivVegNonVeg.setColorFilter(ContextCompat.getColor(context, R.color.green), PorterDuff.Mode.SRC_IN);
-        }
 
-        holder.txtProductName.setText(model.getProductName());
-        String rupeeSymbol = "₹"; // code of rupeeSymbol "\u20B9"
-        holder.txtProductPrice.setText(rupeeSymbol + " " + model.getProductPrice());
-        holder.txtProductDescription.setText(model.getProductDesc());
 
-        // Implement displayImage function or use your preferred method for loading images
-        // Example: displayImage(holder.binding.getRoot().getContext(), model.getProductImage(), holder.binding.ivFoodImage);
     }
 
     @Override
@@ -62,7 +54,8 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        ImageView ivVegNonVeg,ivFoodImage;
+        ImageView ivVegNonVeg;
+        ImageView ivFoodImage;
         TextView txtProductName,txtProductPrice,txtProductDescription;
 
         public ViewHolder(@NonNull View itemView) {
@@ -73,5 +66,15 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
             txtProductPrice=itemView.findViewById(R.id.txtProductPrice);
             txtProductDescription=itemView.findViewById(R.id.txtProductDescription);
         }
+    }
+    private void displayImage(Context context, ImageView imageView, String currentPhotoPath) {
+
+        Glide.with(context)
+
+                .load(currentPhotoPath)
+                .placeholder(R.drawable.ic_imageholder)
+                .error(R.drawable.ic_launcher_background)
+                .into(imageView);
+
     }
 }
