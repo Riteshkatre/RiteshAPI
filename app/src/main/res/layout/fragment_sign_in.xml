@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -7,56 +8,62 @@
     android:orientation="vertical"
     android:padding="25dp">
 
-    <androidx.cardview.widget.CardView
+    <!-- Add a LinearLayout as the direct child of the ScrollView -->
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:elevation="15sp"
-        android:layout_marginTop="15sp"
-        app:cardCornerRadius="15sp">
-        <EditText
-            android:id="@+id/etemail"
+        android:orientation="vertical">
+
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:padding="7dp"
-            android:background="#f2f1d3"
             android:layout_height="wrap_content"
-            android:hint="Email_Address"
-            android:singleLine="true"/>
-    </androidx.cardview.widget.CardView>
+            android:elevation="15sp"
+            android:layout_marginTop="15sp"
+            app:cardCornerRadius="15sp">
+            <EditText
+                android:id="@+id/etemail"
+                android:layout_width="match_parent"
+                android:padding="7dp"
+                android:background="#f2f1d3"
+                android:layout_height="wrap_content"
+                android:hint="Email_Address"
+                android:singleLine="true"/>
+        </androidx.cardview.widget.CardView>
 
-    <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:elevation="15sp"
-        android:layout_marginTop="15sp"
-        app:cardCornerRadius="15sp">
-        <EditText
-            android:id="@+id/etpassword"
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:padding="7dp"
-            android:inputType="textPassword"
-            android:background="#f2f1d3"
             android:layout_height="wrap_content"
-            android:hint="Password"
-            android:singleLine="true"/>
-    </androidx.cardview.widget.CardView>
+            android:elevation="15sp"
+            android:layout_marginTop="15sp"
+            app:cardCornerRadius="15sp">
+            <EditText
+                android:id="@+id/etpassword"
+                android:layout_width="match_parent"
+                android:padding="7dp"
+                android:inputType="textPassword"
+                android:background="#f2f1d3"
+                android:layout_height="wrap_content"
+                android:hint="Password"
+                android:singleLine="true"/>
+        </androidx.cardview.widget.CardView>
 
-    <Button
-        android:id="@+id/btnsignin"
-        android:layout_width="match_parent"
-        android:textSize="22sp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="25sp"
-        android:text="Sign In"
-        android:backgroundTint="#d6a511"/>
+        <Button
+            android:id="@+id/btnsignin"
+            android:layout_width="match_parent"
+            android:textSize="22sp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25sp"
+            android:text="Sign In"
+            android:backgroundTint="#d6a511"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="15sp"
-        android:textColor="@color/white"
-        android:layout_marginTop="20sp"
-        android:layout_marginLeft="100dp"
-        android:text="Forget_Password"
-        />
-
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:textColor="@color/white"
+            android:layout_marginTop="20sp"
+            android:layout_marginLeft="100dp"
+            android:text="Forget_Password"
+            />
+    </LinearLayout>
 </ScrollView>
