@@ -16,6 +16,7 @@ import com.example.riteshapi.Network.RestCall;
 import com.example.riteshapi.Network.RestClient;
 import com.example.riteshapi.R;
 import com.example.riteshapi.RegistrationAndSlash.SharedPreference;
+import com.example.riteshapi.Tools;
 import com.example.riteshapi.Variablebags.VeriableBag;
 
 import rx.Subscriber;
@@ -27,12 +28,9 @@ public class CatelogActivity extends AppCompatActivity {
     RestCall restCall;
     TextView txtNoDataAvailable;
     SwipeRefreshLayout swipe;
-
-
-
-
     SharedPreference sharedPreference;
     CatalogueAdapter catalogueAdapter;
+    Tools tools;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,18 +39,12 @@ public class CatelogActivity extends AppCompatActivity {
         rcvcatelogcat=findViewById(R.id.rcvcatelogcat);
         txtNoDataAvailable=findViewById(R.id.txtNoDataAvailable);
         swipe=findViewById(R.id.swipe);
-        init();
-    }
 
-
-    private void init() {
-
-       txtNoDataAvailable.setVisibility(View.VISIBLE);
+        txtNoDataAvailable.setVisibility(View.VISIBLE);
         rcvcatelogcat.setVisibility(View.GONE);
         restCall = RestClient.createService(RestCall.class, VeriableBag.BASE_URL, VeriableBag.API_KEY);
         sharedPreference = new SharedPreference(CatelogActivity.this);
-
-
+        getCatalogue();
 
         swipe.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -70,33 +62,33 @@ public class CatelogActivity extends AppCompatActivity {
     private void getCatalogue() {
         restCall.GetCatalog("GetCatalog", sharedPreference.getStringvalue("user_id"))
                 .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread()) // Observe on the main (UI) thread
+                .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<CatalogueListResponse>() {
                     @Override
                     public void onCompleted() {
-                        // You can perform any cleanup or post-processing here.
                     }
 
                     @Override
                     public void onError(Throwable e) {
-                        // Handle the error, and show a toast message for now.
-                        // You can add more specific error handling based on your requirements.
+
                         txtNoDataAvailable.setVisibility(View.VISIBLE);
                         rcvcatelogcat.setVisibility(View.GONE);
                         swipe.setRefreshing(false);
+
                         Toast.makeText(CatelogActivity.this, "Something went wrong: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
                     public void onNext(CatalogueListResponse catalogueListResponse) {
-                        // Handle the response here, update the UI as needed.
+
                         if (catalogueListResponse != null && catalogueListResponse.getStatus().equalsIgnoreCase(VeriableBag.SUCCESS_CODE)) {
                             txtNoDataAvailable.setVisibility(View.GONE);
                             rcvcatelogcat.setVisibility(View.VISIBLE);
+
                             swipe.setRefreshing(false);
                             setupRecyclerView(catalogueListResponse);
                         } else {
-                            // Handle the case where the response is not successful.
+
                             txtNoDataAvailable.setVisibility(View.VISIBLE);
                             rcvcatelogcat.setVisibility(View.GONE);
                         }
@@ -110,4 +102,5 @@ public class CatelogActivity extends AppCompatActivity {
 
         catalogueAdapter = new CatalogueAdapter(this, catalogueListResponse.getCategoryList());
         rcvcatelogcat.setAdapter(catalogueAdapter);
-    }}
+    }
+}

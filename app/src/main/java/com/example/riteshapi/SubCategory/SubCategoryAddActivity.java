@@ -86,7 +86,7 @@ public class SubCategoryAddActivity extends AppCompatActivity {
     }
 
     public void AddSubCategory(){
-        restCall.addSubCategory("AddSubCategory",category_id,subcategory_name,sharedPreference.getStringvalue("user_id"))
+        restCall.AddSubCategory("AddSubCategory",category_id,subcategory_name,sharedPreference.getStringvalue("user_id"))
                 .subscribeOn(Schedulers.io()).
                 observeOn(Schedulers.newThread()).
                 subscribe(new Subscriber<CommonSubCategoryResponce>() {

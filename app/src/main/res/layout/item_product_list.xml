@@ -8,23 +8,31 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_marginTop="5dp">
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:elevation="200dp"
+            android:layout_marginLeft="7dp"
+            android:layout_marginRight="7dp"
+            app:cardCornerRadius="5dp"
+            android:backgroundTint="@color/gray">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="183dp"
+                android:layout_height="113dp"
                 android:layout_marginStart="2dp"
                 android:layout_marginTop="4dp"
-                android:layout_marginEnd="2dp"
+                android:layout_marginEnd="44dp"
                 android:layout_marginBottom="2dp"
-                android:layout_toStartOf="@id/cdFoodImage"
+                android:layout_toStartOf="@id/Image"
                 android:orientation="vertical">
 
                 <ImageView
-                    android:id="@+id/ivVegNonVeg"
+                    android:id="@+id/imageVeg"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:layout_gravity="center_vertical"
@@ -32,28 +40,29 @@
                     tools:ignore="ContentDescription" />
 
                 <TextView
-                    android:id="@+id/txtProductName"
+                    android:id="@+id/tvProductName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
-                    android:maxLines="2"
-                    android:textSize="17dp"
                     android:hint="name"
+                    android:maxLines="2"
                     android:textColor="@color/black"
+                    android:textSize="17dp"
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/txtProductPrice"
+                    android:id="@+id/tvProductPrice"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
+                    android:hint="price"
+                    android:textColor="@color/black"
                     android:maxLines="1"
-                   android:hint="price"
                     android:textSize="16dp"
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/txtProductDescription"
+                    android:id="@+id/tvProductDescription"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
@@ -65,8 +74,8 @@
             </LinearLayout>
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/cdFoodImage"
-                android:layout_width="100dp"
+                android:id="@+id/Image"
+                android:layout_width="180dp"
                 android:layout_height="120dp"
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
@@ -78,7 +87,7 @@
                     android:layout_height="wrap_content">
 
                     <ImageView
-                        android:id="@+id/ivFoodImage"
+                        android:id="@+id/imageCap"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_gravity="center_vertical"
@@ -91,6 +100,7 @@
             </androidx.cardview.widget.CardView>
 
         </RelativeLayout>
+        </androidx.cardview.widget.CardView>
 
 
 

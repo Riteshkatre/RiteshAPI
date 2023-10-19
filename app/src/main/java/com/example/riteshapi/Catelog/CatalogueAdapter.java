@@ -32,14 +32,28 @@ public class CatalogueAdapter extends Adapter<CatalogueAdapter.ViewHolder> {
         return new ViewHolder(view);
     }
 
+
+
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         CategoryList model = categoryList.get(position);
 
-        holder.txtCategoryName.setText(model.getCategoryName());
+        holder.tvcatname.setText(model.getCategoryName());
         int totalProducts = model.getSubCategoryList().get(0).getProductList().size();
-        holder.txtSubCategoryName.setText(model.getSubCategoryList().get(0).getSubcategoryName() + " (" + totalProducts + ")");
-        holder.rvProductList.setVisibility(View.VISIBLE);
+        holder.tvsubname.setText(model.getSubCategoryList().get(0).getSubcategoryName() +"  "+  ("No Of Product"+" "+(totalProducts)));
+        holder.rvProductList.setVisibility(View.GONE);
+
+        // Set a click listener for tvsubname to toggle product list visibility
+        holder.tvsubname.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (holder.rvProductList.getVisibility() == View.VISIBLE) {
+                    holder.rvProductList.setVisibility(View.GONE);
+                } else {
+                    holder.rvProductList.setVisibility(View.VISIBLE);
+                }
+            }
+        });
 
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(context, RecyclerView.VERTICAL, false);
         holder.rvProductList.setLayoutManager(layoutManager);
@@ -48,19 +62,20 @@ public class CatalogueAdapter extends Adapter<CatalogueAdapter.ViewHolder> {
         holder.rvProductList.setAdapter(productListAdapter);
     }
 
+
     @Override
     public int getItemCount() {
         return categoryList.size();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView txtCategoryName, txtSubCategoryName;
+        TextView tvcatname, tvsubname;
         RecyclerView rvProductList;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            txtCategoryName = itemView.findViewById(R.id.txtCategoryName);
-            txtSubCategoryName = itemView.findViewById(R.id.txtSubCategoryName);
+            tvcatname = itemView.findViewById(R.id.tvcatname);
+            tvsubname = itemView.findViewById(R.id.tvsubname);
             rvProductList = itemView.findViewById(R.id.rvProductList);
         }
     }

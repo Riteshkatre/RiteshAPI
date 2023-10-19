@@ -39,10 +39,10 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         ProductList productList = productLists.get(position);
-        holder.txtProductName.setText(productList.getProductName());
-        holder.txtProductPrice.setText( productList.getProductPrice());
-        holder.txtProductDescription.setText(productList.getProductDesc());
-        displayImage(holder.ivVegNonVeg.getContext(), holder.ivFoodImage, productList.getProductImage());
+        holder.tvProductName.setText(productList.getProductName());
+        holder.tvProductPrice.setText( productList.getProductPrice());
+        holder.tvProductDescription.setText(productList.getProductDesc());
+        displayImage(holder.imageVeg.getContext(), holder.imageCap, productList.getProductImage());
 
 
 
@@ -54,17 +54,17 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        ImageView ivVegNonVeg;
-        ImageView ivFoodImage;
-        TextView txtProductName,txtProductPrice,txtProductDescription;
+        ImageView imageVeg;
+        ImageView imageCap;
+        TextView tvProductName,tvProductPrice,tvProductDescription;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            ivFoodImage=itemView.findViewById(R.id.ivFoodImage);
-            ivVegNonVeg=itemView.findViewById(R.id.ivVegNonVeg);
-            txtProductName=itemView.findViewById(R.id.txtProductName);
-            txtProductPrice=itemView.findViewById(R.id.txtProductPrice);
-            txtProductDescription=itemView.findViewById(R.id.txtProductDescription);
+            imageCap=itemView.findViewById(R.id.imageCap);
+            imageVeg=itemView.findViewById(R.id.imageVeg);
+            tvProductName=itemView.findViewById(R.id.tvProductName);
+            tvProductPrice=itemView.findViewById(R.id.tvProductPrice);
+            tvProductDescription=itemView.findViewById(R.id.tvProductDescription);
         }
     }
     private void displayImage(Context context, ImageView imageView, String currentPhotoPath) {

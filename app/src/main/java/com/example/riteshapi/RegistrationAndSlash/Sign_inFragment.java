@@ -27,8 +27,6 @@ public class Sign_inFragment extends Fragment {
     EditText etemail, etpassword;
     String email1,password1;
     Button btnsignin;
-
-    String firstName,lastName;
     private SharedPreference sharedPreference;
     RestCall restCall;
 
@@ -52,12 +50,21 @@ public class Sign_inFragment extends Fragment {
         btnsignin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                email1=etemail.getText().toString().trim();
-                password1=etpassword.getText().toString().trim();
-               LoginUser(email1, password1);
+                email1 = etemail.getText().toString().trim();
+                password1 = etpassword.getText().toString().trim();
 
+                if (email1.isEmpty() || password1.isEmpty()) {
 
+                    etemail.setError("Email is required");
+                    etemail.requestFocus();
+                    etpassword.setError("Password is required");
+                    etpassword.requestFocus();
 
+                    Toast.makeText(getActivity(), "Please enter both email and password.", Toast.LENGTH_SHORT).show();
+                } else {
+
+                    LoginUser(email1, password1);
+                }
             }
         });
 
