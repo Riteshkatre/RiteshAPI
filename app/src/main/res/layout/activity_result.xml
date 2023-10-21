@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     tools:context=".Category.ResultActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/dark_blue">
 
 
     <LinearLayout
@@ -18,7 +19,7 @@
             android:layout_height="wrap_content"
             android:elevation="10dp"
             app:cardCornerRadius="20dp"
-            android:backgroundTint="#605e6a">
+            android:backgroundTint="#B1A5A5">
 
         <ImageView
             android:id="@+id/imgSearch"
@@ -66,7 +67,7 @@
             android:layout_marginLeft="10dp"
             android:layout_marginTop="30dp"
             android:layout_marginRight="10dp"
-            android:background="#605e6a" />
+            android:background="#B1A5A5" />
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     <Button
@@ -74,7 +75,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="+"
-        android:backgroundTint="#6726DC"
+        android:textStyle="bold"
+        android:backgroundTint="#d6a511"
         android:textSize="20dp"
         android:layout_gravity="end"/>
 

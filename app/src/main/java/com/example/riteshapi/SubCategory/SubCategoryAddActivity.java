@@ -33,7 +33,7 @@ public class SubCategoryAddActivity extends AppCompatActivity {
     Button btnaddsubdata;
     AppCompatSpinner spinneradd;
 
-    String selectedCategoryId,selectedSubCategoryId, subcategory_name, category_id;
+    String selectedCategoryId,selectedSubCategoryId,selectedCategoryName;
     SharedPreference sharedPreference;
 
     int selectedPos = 0;
@@ -50,16 +50,18 @@ public class SubCategoryAddActivity extends AppCompatActivity {
         sharedPreference=new SharedPreference(this);
 
         restCall = RestClient.createService(RestCall.class, VeriableBag.BASE_URL, VeriableBag.API_KEY);
+
         GetCatogary();
+
         Bundle bundle = getIntent().getExtras();
         if (bundle != null && bundle.getString("category_id") != null) {
 
             isEdit = true;
-            category_id = bundle.getString("category_id");
+            selectedCategoryId = bundle.getString("category_id");
             selectedSubCategoryId = bundle.getString("sub_category_id");
-            subcategory_name = bundle.getString("subCategoryName");
+            selectedCategoryName = bundle.getString("subCategoryName");
 
-            edtsubname.setText(subcategory_name);
+            edtsubname.setText(selectedCategoryName);
             btnaddsubdata.setText("Edit");
         } else {
             isEdit = false;
@@ -69,23 +71,26 @@ public class SubCategoryAddActivity extends AppCompatActivity {
         btnaddsubdata.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (spinneradd != null && edtsubname.getText().toString().trim().equalsIgnoreCase("")) {
+                if (selectedCategoryId == null || selectedCategoryId.equals("-1")) {
+                    // No valid category selected
+                    Toast.makeText(SubCategoryAddActivity.this, "Please select a category.", Toast.LENGTH_SHORT).show();
+                } else if (edtsubname != null && edtsubname.getText().toString().trim().isEmpty()) {
                     edtsubname.setError("Enter Sub-Category Name");
                     edtsubname.requestFocus();
                 } else {
                     if (isEdit) {
                         editSubCategoryCall();
                     } else {
-                        AddSubCategory();
+                        AddSubCategory(selectedCategoryId, edtsubname.getText().toString().trim());
                     }
                 }
-
             }
         });
 
+
     }
 
-    public void AddSubCategory(){
+    public void AddSubCategory(String category_id,String subcategory_name) {
         restCall.AddSubCategory("AddSubCategory",category_id,subcategory_name,sharedPreference.getStringvalue("user_id"))
                 .subscribeOn(Schedulers.io()).
                 observeOn(Schedulers.newThread()).
@@ -114,6 +119,7 @@ public class SubCategoryAddActivity extends AppCompatActivity {
                                 if (commonSubCategoryResponce.getStatus().equalsIgnoreCase(VeriableBag.SUCCESS_CODE)) {
                                     edtsubname.setText("");
                                     finish();
+
                                 }
                                 Toast.makeText(SubCategoryAddActivity.this, ""+commonSubCategoryResponce.getMessage(), Toast.LENGTH_SHORT).show();
                             }
@@ -125,13 +131,13 @@ public class SubCategoryAddActivity extends AppCompatActivity {
     }
     private void editSubCategoryCall() {
         restCall.editSubCategory("EditSubCategory", selectedCategoryId,
-                        edtsubname.getText().toString(), selectedSubCategoryId,sharedPreference.getStringvalue("user_id"))
+                        edtsubname.getText().toString(), selectedSubCategoryId,
+                        sharedPreference.getStringvalue("user_id"))
                 .subscribeOn(Schedulers.io())
                 .observeOn(Schedulers.newThread())
                 .subscribe(new Subscriber<CommonSubCategoryResponce>() {
                     @Override
                     public void onCompleted() {
-
                     }
 
                     @Override
@@ -219,6 +225,7 @@ public class SubCategoryAddActivity extends AppCompatActivity {
                                             selectedPos = position;
                                             if (selectedPos >= 0 && selectedPos < categoryIdArray.length) {
                                                 selectedCategoryId = categoryIdArray[selectedPos];
+
                                                 /*selectedCategoryName = categoryNameArray[selectedPos];*/
 
                                             }
@@ -226,6 +233,8 @@ public class SubCategoryAddActivity extends AppCompatActivity {
 
                                         @Override
                                         public void onNothingSelected(AdapterView<?> adapterView) {
+
+
 
                                         }
                                     });

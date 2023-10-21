@@ -1,6 +1,7 @@
 package com.example.riteshapi.Product;
 
 import android.content.Context;
+import android.graphics.PorterDuff;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -29,6 +31,10 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductD
         this.context = context;
         this.productList = productList;
         this.Searchlist = productList;
+    }
+    public void clearData() {
+        productList.clear();
+        notifyDataSetChanged();
     }
 
     public interface onProductItemClickListener {
@@ -51,6 +57,11 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductD
     @Override
     public void onBindViewHolder(@NonNull ProductDataViewHolder holder, int position) {
         ProductListResponce.Product product = Searchlist.get(position);
+        if (product.getIsVeg().equalsIgnoreCase("0")) {
+            holder.vegNonVegIcon.setColorFilter(ContextCompat.getColor(context, R.color.green), PorterDuff.Mode.SRC_IN);
+        } else {
+            holder.vegNonVegIcon.setColorFilter(ContextCompat.getColor(context, R.color.red), PorterDuff.Mode.SRC_IN);
+        }
 
         holder.txtName.setText(product.getProductName());
         holder.txtPrice.setText(product.getProductPrice());
@@ -86,7 +97,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductD
 
         TextView txtName, txtPrice, txtDesc;
         ImageButton btnDel, btnEdit;
-        ImageView imageViewProduct;
+        ImageView imageViewProduct,vegNonVegIcon;
 
         public ProductDataViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -97,6 +108,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductD
             btnDel = itemView.findViewById(R.id.btn_product_delete);
             btnEdit = itemView.findViewById(R.id.btn_product_edit);
             imageViewProduct = itemView.findViewById(R.id.img_productt);
+            vegNonVegIcon=itemView.findViewById(R.id.vegNonVegIcon);
         }
     }
 

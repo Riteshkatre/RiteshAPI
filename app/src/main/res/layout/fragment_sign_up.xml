@@ -25,7 +25,7 @@
                 android:padding="7dp"
                 android:layout_height="wrap_content"
                 android:background="#f2f1d3"
-                android:hint="First_Name"
+                android:hint="First Name"
                 android:singleLine="true"/>
         </androidx.cardview.widget.CardView>
 
@@ -42,7 +42,7 @@
                 android:padding="7sp"
                 android:background="#f2f1d3"
                 android:layout_height="wrap_content"
-                android:hint="Last_Name"
+                android:hint="Last Name"
                 android:singleLine="true"/>
         </androidx.cardview.widget.CardView>
 
@@ -59,7 +59,7 @@
                 android:padding="7dp"
                 android:background="#f2f1d3"
                 android:layout_height="wrap_content"
-                android:hint="Email_Address"
+                android:hint="Email Address"
                 android:singleLine="true"/>
         </androidx.cardview.widget.CardView>
 
@@ -69,16 +69,26 @@
             android:elevation="15sp"
             android:layout_marginTop="15sp"
             app:cardCornerRadius="15sp">
+
             <EditText
                 android:id="@+id/etpassword"
                 android:layout_width="match_parent"
-                android:imeOptions="actionDone"
-                android:padding="7dp"
-                android:background="#f2f1d3"
-                android:inputType="textPassword"
                 android:layout_height="wrap_content"
+                android:background="#f2f1d3"
                 android:hint="Password"
-                android:singleLine="true"/>
+                android:imeOptions="actionDone"
+                android:inputType="textPassword"
+                android:padding="7dp"
+                android:singleLine="true" />
+
+            <ImageView
+                android:id="@+id/showpassword"
+                android:layout_width="30dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="250dp"
+                android:layout_marginTop="8dp"
+                android:src="@drawable/ic_eye_close"
+                android:backgroundTint="@color/black"/>
         </androidx.cardview.widget.CardView>
 
         <Button

@@ -9,7 +9,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.riteshapi.Category.ResultActivity;
-import com.example.riteshapi.Catelog.CatelogActivity;
+import com.example.riteshapi.Catelog.CatalogActivity;
 import com.example.riteshapi.Product.ProductAct;
 import com.example.riteshapi.RegistrationAndSlash.RegistrationActivity;
 import com.example.riteshapi.RegistrationAndSlash.SharedPreference;
@@ -55,7 +55,7 @@ public class HomePageActivity extends AppCompatActivity {
         productadd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(HomePageActivity.this, CatelogActivity.class);
+                Intent intent = new Intent(HomePageActivity.this, CatalogActivity.class);
                 startActivity(intent);
 
 

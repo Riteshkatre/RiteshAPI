@@ -2,36 +2,72 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="#B1A5A5">
 
-
-    <TextView
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="SubData Add"
-        android:textAlignment="center"
-        android:layout_marginTop="20dp"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        />
-    <androidx.appcompat.widget.AppCompatSpinner
-        android:id="@+id/spinneradd"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp"/>
-
-    <EditText
-        android:id="@+id/edtsubname"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Enter the Sub-Category Name "
-        android:layout_margin="20dp"/>
-    <Button
-        android:id="@+id/btnaddsubdata"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Add"
+        android:layout_height="275dp"
         android:layout_gravity="center"
-        android:layout_marginTop="20dp"/>
+        android:layout_marginLeft="7dp"
+        android:layout_marginTop="170dp"
+        android:layout_marginRight="7dp"
+        android:backgroundTint="@color/dark_blue"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="10dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="SubData Add"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginRight="16dp"
+            android:backgroundTint="#B1A5A5">
+
+            <androidx.appcompat.widget.AppCompatSpinner
+                android:id="@+id/spinneradd"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="110dp"
+            android:layout_marginRight="20dp"
+            android:background="@color/white"
+            android:elevation="10dp"
+            app:cardCornerRadius="15dp">
+
+            <EditText
+                android:id="@+id/edtsubname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:hint="Enter the Sub-Category Name " />
+        </androidx.cardview.widget.CardView>
+
+        <Button
+            android:id="@+id/btnaddsubdata"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="90dp"
+            android:backgroundTint="#FFC107"
+            android:text="Add"
+            android:textColor="@color/black"
+            android:textStyle="bold" />
+    </androidx.cardview.widget.CardView>
 
 </LinearLayout>

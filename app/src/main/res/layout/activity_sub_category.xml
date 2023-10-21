@@ -5,28 +5,23 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".SubCategory.SubCategoryActivity"
-    android:orientation="vertical">
-    <androidx.cardview.widget.CardView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
-        android:elevation="20dp"
-        app:cardCornerRadius="10dp"
-        android:layout_marginTop="10dp"
-        android:backgroundTint="#000000">
+    android:orientation="vertical"
+    android:background="@color/dark_blue">
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="This Data For SubCategory:"
         android:textSize="30dp"
         android:layout_marginTop="10dp"
-        android:textColor="#6726DC"/>
-    </androidx.cardview.widget.CardView>
+        android:textColor="@color/white"
+        android:layout_marginLeft="14dp"/>
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:background="#605E5E"
+        android:background="#B1A5A5"
         android:layout_marginRight="15dp"
         android:layout_marginLeft="15dp">
         <androidx.appcompat.widget.AppCompatSpinner
@@ -54,15 +49,16 @@
         android:layout_marginLeft="10dp"
         android:layout_marginTop="30dp"
         android:layout_marginRight="20dp"
-        android:background="@color/white">
+        android:background="@color/dark_blue">
         <androidx.cardview.widget.CardView
-            android:layout_width="wrap_content"
+            android:id="@+id/crs"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="20dp"
             android:elevation="10dp"
             app:cardCornerRadius="20dp"
-            android:backgroundTint="#605e6a">
+            android:backgroundTint="#B1A5A5">
 
         <ImageView
             android:layout_width="50dp"
@@ -86,7 +82,7 @@
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/subswap"
         android:layout_width="match_parent"
-        android:layout_height="430dp"
+        android:layout_height="450dp"
         android:layout_marginTop="20dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp">
@@ -97,14 +93,16 @@
         android:layout_marginTop="30dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:background="#605e6a" />
+        android:background="#B1A5A5" />
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
     <Button
         android:id="@+id/subbtnpluse"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="+"
-        android:backgroundTint="#6726DC"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:backgroundTint="#FFC107"
         android:textSize="20dp"
         android:layout_gravity="end"/>
 

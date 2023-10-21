@@ -5,11 +5,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".RegistrationAndSlash.SlashScreenActivity"
-    android:background="#7e9372">
+    android:background="#738867">
 
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="669dp"
+        android:layout_height="match_parent"
         android:src="@drawable/logo" />
 
 </LinearLayout>

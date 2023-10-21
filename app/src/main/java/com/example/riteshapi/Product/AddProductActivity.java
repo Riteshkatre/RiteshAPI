@@ -50,9 +50,10 @@ public class AddProductActivity extends AppCompatActivity {
 
     ImageButton imageButtonEdit;
     ImageView imageView;
-    String currentPhotoPath ="" , user_id, categoryID  , subCategoryID , imggg , productId ,
+    String currentPhotoPath ="" , user_id, categoryID  , subCategoryID , productId ,
             productName , productPrice ,productDes ,productOldImage , productImage  , product_isVeg  ;
     RestCall restCall;
+
     ActivityResultLauncher<Intent> cameraLauncher;
     int REQUEST_CAMERA_PERMISSION = 101;
     File CurentPhotoFile ;
@@ -60,10 +61,6 @@ public class AddProductActivity extends AppCompatActivity {
     Button btnSubmit ,buttonCancel;
     SharedPreference preferenceManger;
     boolean isEditMode ;
-
-
-
-
     Switch switchVegNonVeg;
 
 
@@ -84,12 +81,7 @@ public class AddProductActivity extends AppCompatActivity {
         preferenceManger= new SharedPreference(this);
         user_id = preferenceManger.getStringvalue("user_id");
 
-
-
-
-
         if (getIntent().getStringExtra("product_Id") != null){
-
             categoryID = getIntent().getStringExtra("category_Id");
             subCategoryID = getIntent().getStringExtra("subCat_id");
             productId = getIntent().getStringExtra("product_Id");
@@ -100,6 +92,8 @@ public class AddProductActivity extends AppCompatActivity {
             productImage = getIntent().getStringExtra("getProductImage");
             product_isVeg = getIntent().getStringExtra("getIsVeg");
 
+            switchVegNonVeg.setChecked(product_isVeg != null && product_isVeg.equals("1"));
+
             Glide .with(this)
                     .load(productImage)
                     .placeholder(R.drawable.ic_imageholder)
@@ -108,21 +102,22 @@ public class AddProductActivity extends AppCompatActivity {
             editTextName.setText(productName);
             editTextPrice.setText(productPrice);
             editTextDesc.setText(productDes);
+
             isEditMode = true;
         }else{
             isEditMode = false;
             btnSubmit.setText("Submit");
         }
-
-
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = getIntent();
                 categoryID = ((Intent) intent).getExtras().getString("category_Id");
                 subCategoryID = ((Intent) intent).getExtras().getString("subCat_id");
+                if(categoryID==null||subCategoryID==null){
+                    Toast.makeText(AddProductActivity.this, "Please select both category and sub-category before press button add", Toast.LENGTH_SHORT).show();
 
-                if(editTextName.getText().toString().equalsIgnoreCase("")){
+                } else if(editTextName.getText().toString().equalsIgnoreCase("")){
                     editTextName.setError("Enter the name");
                     editTextName.requestFocus();
                 } else if (editTextPrice.getText().toString().equalsIgnoreCase("")) {
@@ -168,7 +163,6 @@ public class AddProductActivity extends AppCompatActivity {
             }
         });
     }
-
 
     private void AddProduct(){
 
@@ -247,12 +241,14 @@ public class AddProductActivity extends AppCompatActivity {
 
 
     public  void ProductEdit(){
-        productImage = currentPhotoPath;
+        if (currentPhotoPath.isEmpty()) {
+            currentPhotoPath = productImage;
+        }
 
 
         restCall.EditProduct("EditProduct",categoryID,subCategoryID,productId,editTextName.getText().toString(),
                         editTextPrice.getText().toString(),productOldImage,editTextDesc.getText().toString()
-                        ,product_isVeg,user_id,productImage)
+                        ,product_isVeg,user_id,currentPhotoPath)
                 .subscribeOn(Schedulers.io())
                 .observeOn(Schedulers.newThread())
                 .subscribe(new Subscriber<CommonResponce>() {

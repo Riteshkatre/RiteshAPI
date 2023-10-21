@@ -16,6 +16,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatSpinner;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -46,6 +47,7 @@ public class SubCategoryActivity extends AppCompatActivity {
     RestCall restCall;
 
     int selectedPos = 0;
+    CardView crs;
 
     SubCategoryAdapter subCategoryAdapter;
     String selectedCategoryId;
@@ -59,7 +61,11 @@ public class SubCategoryActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sub_category);
         subbtnpluse=findViewById(R.id.subbtnpluse);
         subrcv=findViewById(R.id.subrcv);
+
         subsearchbar=findViewById(R.id.subsearchbar);
+        crs=findViewById(R.id.crs);
+        crs.setVisibility(View.GONE);
+
         subswap=findViewById(R.id.subswap);
         subspinnerDropdown=findViewById(R.id.subspinnerDropdown);
         sharedPreference=new SharedPreference(this);
@@ -83,10 +89,8 @@ public class SubCategoryActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(SubCategoryActivity.this, SubCategoryAddActivity.class);
                 startActivity(intent);
-
             }
         });
-
 
         subsearchbar.addTextChangedListener(new TextWatcher() {
             @Override
@@ -266,7 +270,14 @@ public class SubCategoryActivity extends AppCompatActivity {
                                                 selectedCategoryId = categoryIdArray[selectedPos];
                                                 selectedCategoryName = categoryNameArray[selectedPos];
 
-                                                GetSubCategory();
+                                                if (selectedCategoryId.equals("-1")) {
+                                                    // The "Select Category" option is selected, hide the search bar
+                                                    crs.setVisibility(View.GONE);
+                                                } else {
+                                                    // A category is selected, show the search bar
+                                                    crs.setVisibility(View.VISIBLE);
+                                                    GetSubCategory();
+                                                }
 
                                             }
                                         }

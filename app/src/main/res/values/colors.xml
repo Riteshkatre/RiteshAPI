@@ -18,5 +18,9 @@
     <color name="Orange">#FF5722</color>
     <color name="lightyellow">#DAB341</color>
     <color name="darkyellow">#BCA76C</color>
+    <color name="light_white">#F1EEEE</color>
+    <color name="background">#283858</color>
+
+    <color name="red">#DC0F00</color>
 
 </resources>

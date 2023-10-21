@@ -36,7 +36,8 @@
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:layout_gravity="center_vertical"
-                    android:src="@drawable/images"
+                    android:src="@drawable/ic_veg_non_veg"
+                    android:backgroundTint="@color/green"
                     tools:ignore="ContentDescription" />
 
                 <TextView

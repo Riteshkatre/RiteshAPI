@@ -38,7 +38,7 @@
             android:label="@string/title_activity_edit_product"
             android:theme="@style/Theme.RiteshAPI" />
         <activity
-            android:name=".Catelog.CatelogActivity"
+            android:name=".Catelog.CatalogActivity"
             android:exported="false" />
         <activity
             android:name=".Product.ProductListActivity"
@@ -60,9 +60,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".SubCategory.EditSubCategoryActivity"
-            android:exported="false" />
+<!--        <activity-->
+<!--            android:name=".SubCategory.EditSubCategoryActivity"-->
+<!--            android:exported="false" />-->
         <activity
             android:name=".SubCategory.SubCategoryAddActivity"
             android:exported="false" />

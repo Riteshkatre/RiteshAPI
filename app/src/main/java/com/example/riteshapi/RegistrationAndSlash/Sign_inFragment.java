@@ -2,14 +2,18 @@ package com.example.riteshapi.RegistrationAndSlash;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputType;
+import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import com.example.riteshapi.HomePageActivity;
@@ -27,8 +31,11 @@ public class Sign_inFragment extends Fragment {
     EditText etemail, etpassword;
     String email1,password1;
     Button btnsignin;
+    ImageView showpassword;
     private SharedPreference sharedPreference;
     RestCall restCall;
+    private boolean isPasswordVisible = false;
+
 
 
     @Override
@@ -38,6 +45,7 @@ public class Sign_inFragment extends Fragment {
         etemail = view.findViewById(R.id.etemail);
         etpassword = view.findViewById(R.id.etpassword);
         btnsignin = view.findViewById(R.id.btnsignin);
+        showpassword=view.findViewById(R.id.showpassword);
         sharedPreference = new SharedPreference(getContext());
         restCall = RestClient.createService(RestCall.class, VeriableBag.BASE_URL, VeriableBag.API_KEY);
         if (sharedPreference.isLoggedIn()) {
@@ -46,6 +54,15 @@ public class Sign_inFragment extends Fragment {
         }else{
             getContext();
         }
+
+        showpassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                togglePasswordVisibility();
+
+
+            }
+        });
 
         btnsignin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -118,6 +135,21 @@ public class Sign_inFragment extends Fragment {
 
                     }
                 });
+
+    }
+
+    private void togglePasswordVisibility() {
+        if (isPasswordVisible) {
+            etpassword.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+            etpassword.setTransformationMethod(PasswordTransformationMethod.getInstance());
+            showpassword.setImageDrawable(ContextCompat.getDrawable(requireActivity(), R.drawable.ic_eye_close));
+        } else {
+            etpassword.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+            showpassword.setImageDrawable(ContextCompat.getDrawable(requireActivity(), R.drawable.baseline_remove_red_eye_24));
+        }
+
+        etpassword.setSelection(etpassword.getText().length());
+        isPasswordVisible = !isPasswordVisible;
 
     }
 

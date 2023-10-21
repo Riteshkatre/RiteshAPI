@@ -1,6 +1,7 @@
 package com.example.riteshapi.Network;
 
-import com.example.riteshapi.Catelog.NetworkResponce.CatalogueListResponse;
+
+import com.example.riteshapi.NetworkResponce.CatalogListResponse;
 import com.example.riteshapi.NetworkResponce.CategoryListResponce;
 import com.example.riteshapi.NetworkResponce.CommonResponce;
 import com.example.riteshapi.NetworkResponce.CommonSubCategoryResponce;
@@ -139,10 +140,9 @@ public interface RestCall {
     );
     @FormUrlEncoded
     @POST("ProductController.php")
-    Single<CatalogueListResponse> GetCatalog(
+    Single<CatalogListResponse> GetCatalog(
             @Field("tag") String tag,
-            @Field("user_id") String user_id
-    );
+            @Field("user_id") String user_id);
 
 
     @FormUrlEncoded

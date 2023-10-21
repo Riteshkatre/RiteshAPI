@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatSpinner;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -43,6 +44,7 @@ public class ProductAct extends AppCompatActivity {
     RecyclerView rvProduct;
     RestCall restCall;
     EditText searchbar;
+    CardView pcv;
 
     ProductAdapter productAdapter;
     SharedPreference preferenceManger;
@@ -58,6 +60,8 @@ public class ProductAct extends AppCompatActivity {
         floatingActionButton = findViewById(R.id.btn_product_float);
         spinner_Category = findViewById(R.id.spinner_category);
         spinner_SubCategory = findViewById(R.id.spinner_subcategory);
+        pcv=findViewById(R.id.pcv);
+        pcv.setVisibility(View.GONE);
         rvProduct = findViewById(R.id.rv_product_data);
         searchbar=findViewById(R.id.searchbar);
 
@@ -76,10 +80,15 @@ public class ProductAct extends AppCompatActivity {
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ProductAct.this, AddProductActivity.class);
-                intent.putExtra("category_Id", category_Id);
-                intent.putExtra("subCat_id", subCat_id);
-                startActivity(intent);
+                if (category_Id != null && subCat_id != null) {
+                    Intent intent = new Intent(ProductAct.this, AddProductActivity.class);
+                    intent.putExtra("category_Id", category_Id);
+                    intent.putExtra("subCat_id", subCat_id);
+                    startActivity(intent);
+                } else {
+                    // Show a message or take some action to inform the user that both need to be selected.
+                    Toast.makeText(ProductAct.this, "Please select both category and subcategory first", Toast.LENGTH_SHORT).show();
+                }
             }
 
         });
@@ -112,6 +121,8 @@ public class ProductAct extends AppCompatActivity {
             getCategories();
         }
         else {
+            pcv.setVisibility(View.GONE);
+
             GetProduct(subCat_id);
         }
 
@@ -240,18 +251,32 @@ public class ProductAct extends AppCompatActivity {
                                     spinner_SubCategory.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                                         @Override
                                         public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
-                                            for (int i = 0; i < subCategoryListResponse.getSubCategoryList().size(); i++) {
+                                            if(position>0) {
+                                                for (int i = 0; i < subCategoryListResponse.getSubCategoryList().size(); i++) {
 
-                                                if (subCategoryListResponse.getSubCategoryList().get(i).getSubcategoryName() == adapterView.getSelectedItem()) {
+                                                    if (subCategoryListResponse.getSubCategoryList().get(i).getSubcategoryName() == adapterView.getSelectedItem()) {
 
-                                                    subCat_id = subCategoryListResponse.getSubCategoryList().get(i).getSubCategoryId();
-                                                    GetProduct(subCat_id);
+                                                        subCat_id = subCategoryListResponse.getSubCategoryList().get(i).getSubCategoryId();
+                                                        GetProduct(subCat_id);
+                                                        pcv.setVisibility(View.VISIBLE);
+                                                    }
+                                                }
+                                            }else    {
+                                                pcv.setVisibility(View.GONE);
+                                                if (productAdapter != null) {
+                                                    productAdapter.clearData();
                                                 }
                                             }
+
                                         }
 
                                         @Override
                                         public void onNothingSelected(AdapterView<?> parent) {
+                                            pcv.setVisibility(View.GONE);
+                                            if (productAdapter != null) {
+                                                productAdapter.clearData();
+                                            }
+
 
                                         }
                                     });
@@ -267,6 +292,7 @@ public class ProductAct extends AppCompatActivity {
 
 
     public void GetProduct(String subCategoryID) {
+
 
         restCall.GetProduct("getProduct", category_Id, subCategoryID, user_id)
                 .subscribeOn(Schedulers.io())

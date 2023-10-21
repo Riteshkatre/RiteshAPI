@@ -1,10 +1,11 @@
 package com.example.riteshapi.RegistrationAndSlash;
 
+import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
+import android.text.InputType;
 import android.text.TextUtils;
+import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.LayoutInflater;
@@ -12,14 +13,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.example.riteshapi.R;
-import com.example.riteshapi.Variablebags.VeriableBag;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
 
 import com.example.riteshapi.Network.RestCall;
 import com.example.riteshapi.Network.RestClient;
 import com.example.riteshapi.NetworkResponce.CommonUserResponce;
+import com.example.riteshapi.R;
+import com.example.riteshapi.Variablebags.VeriableBag;
+
 import rx.Subscriber;
 import rx.schedulers.Schedulers;
 
@@ -27,9 +32,12 @@ import rx.schedulers.Schedulers;
 public class Sign_upFragment extends Fragment {
     EditText etfirstname, etlastname, etemail, etpassword;
     Button btnsubmit;
+    ImageView showpassword;
     RestCall restCall;
+    private boolean isPasswordVisible = false;
 
 
+    @SuppressLint("MissingInflatedId")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -39,6 +47,7 @@ public class Sign_upFragment extends Fragment {
         etemail = view.findViewById(R.id.etemail);
         etpassword = view.findViewById(R.id.etpassword);
         btnsubmit = view.findViewById(R.id.btnsubmit);
+        showpassword=view.findViewById(R.id.showpassword);
         restCall = RestClient.createService(RestCall.class, VeriableBag.BASE_URL, VeriableBag.API_KEY);
         btnsubmit.setOnClickListener(v -> {
             String firstName = etfirstname.getText().toString().trim();
@@ -73,10 +82,19 @@ public class Sign_upFragment extends Fragment {
                 etpassword.setError("password must be 8 character and alphabetic and numeric there");
             } else {
                 AddUser(firstName, lastName, email, password);
-//                    Toast.makeText(getActivity(), "Sign up successful", Toast.LENGTH_SHORT).show();
+
 
             }
         });
+        showpassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                togglePasswordVisibility();
+
+
+            }
+        });
+
         return (view);
     }
 
@@ -138,7 +156,7 @@ public class Sign_upFragment extends Fragment {
                 .subscribe(new Subscriber<CommonUserResponce>() {
                     @Override
                     public void onCompleted() {
-                        /*saveUserDataLocally(first_name, last_name);*/
+
 
                     }
                     @Override
@@ -163,7 +181,7 @@ public class Sign_upFragment extends Fragment {
                                         etlastname.setText("");
                                         etemail.setText("");
                                         etpassword.setText("");
-                                        getActivity();
+                                        startActivity(new Intent(getContext(), RegistrationActivity.class));
                                     }
                                     Toast.makeText(getActivity(), "" + commonUserResponce.getMessage(), Toast.LENGTH_SHORT).show();
                                 }
@@ -173,5 +191,33 @@ public class Sign_upFragment extends Fragment {
 
 
     }
+    private void navigateToSignInFragment() {
+        Sign_inFragment signInFragment = new Sign_inFragment();
+
+        getActivity().getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.categoryspiner, signInFragment)
+                .commit();
+    }
+
+    private void togglePasswordVisibility() {
+        if (isPasswordVisible) {
+            etpassword.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+            etpassword.setTransformationMethod(PasswordTransformationMethod.getInstance());
+            showpassword.setImageDrawable(ContextCompat.getDrawable(requireActivity(), R.drawable.ic_eye_close));
+        } else {
+            etpassword.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+            showpassword.setImageDrawable(ContextCompat.getDrawable(requireActivity(), R.drawable.baseline_remove_red_eye_24));
+        }
+
+        etpassword.setSelection(etpassword.getText().length());
+        isPasswordVisible = !isPasswordVisible;
+
+    }
+
+
+
+
+
 
 }
