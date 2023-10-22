@@ -37,8 +37,10 @@ public class CatalogProductAdapter extends RecyclerView.Adapter<CatalogProductAd
 
     @Override
     public void onBindViewHolder(@NonNull CatalogProductViewHolder holder, int position) {
+
+        String priceWithSymbol = "₹ " + productList.get(position).getProductPrice();
         holder.tvProductName.setText(productList.get(position).getProductName());
-        holder.tvProductPrice.setText(productList.get(position).getProductPrice());
+        holder.tvProductPrice.setText(priceWithSymbol);
         holder.tvProductDescription.setText(productList.get(position).getProductDesc());
         if (productList.get(position).getIsVeg().equals("1")){
             holder.ivSymbolIsVeg.setImageResource(R.drawable.ic_non_veg_symbol);

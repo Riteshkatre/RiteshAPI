@@ -3,9 +3,19 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/dark_blue">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Product Data"
+        android:textSize="27dp"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:textColor="@color/white"/>
 
     <androidx.recyclerview.widget.RecyclerView
+        android:layout_marginTop="39dp"
         android:id="@+id/recyclerViewCatalog"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

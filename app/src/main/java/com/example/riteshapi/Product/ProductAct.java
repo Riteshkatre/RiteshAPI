@@ -18,6 +18,7 @@ import androidx.appcompat.widget.AppCompatSpinner;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.riteshapi.Network.RestCall;
 import com.example.riteshapi.Network.RestClient;
@@ -48,8 +49,9 @@ public class ProductAct extends AppCompatActivity {
 
     ProductAdapter productAdapter;
     SharedPreference preferenceManger;
-    String user_id, category_Id, subCat_id, product_id;
+    String user_id, category_Id, subCat_id, product_id,subCategoryID,productId;
     Tools tools;
+    SwipeRefreshLayout swipref;
 
     List<String> sub_Category_name, sub_Category_id, category_id, categoryNames;
 
@@ -64,6 +66,7 @@ public class ProductAct extends AppCompatActivity {
         pcv.setVisibility(View.GONE);
         rvProduct = findViewById(R.id.rv_product_data);
         searchbar=findViewById(R.id.searchbar);
+        swipref=findViewById(R.id.swipref);
 
         sub_Category_name = new ArrayList<>();
         sub_Category_id = new ArrayList<>();
@@ -76,7 +79,19 @@ public class ProductAct extends AppCompatActivity {
 
 
         restCall = RestClient.createService(RestCall.class, VeriableBag.BASE_URL, VeriableBag.API_KEY);
-
+        swipref.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                if (product_id != null) {
+                    // Perform the delete action
+                    deleteProduct(product_id);
+                } else {
+                    // Handle the case where there's no product to delete
+                    swipref.setRefreshing(false); // Stop the refresh indicator
+                    Toast.makeText(ProductAct.this, "No product to delete", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -114,7 +129,12 @@ public class ProductAct extends AppCompatActivity {
 
     }
 
-    @Override
+
+
+
+
+
+@Override
     protected void onResume() {
         super.onResume();
         if (category_Id == null){
@@ -292,6 +312,7 @@ public class ProductAct extends AppCompatActivity {
 
 
     public void GetProduct(String subCategoryID) {
+        swipref.setRefreshing(false);
 
 
         restCall.GetProduct("getProduct", category_Id, subCategoryID, user_id)
@@ -389,6 +410,7 @@ public class ProductAct extends AppCompatActivity {
 
 
     public void deleteProduct(String productId) {
+        swipref.setRefreshing(false);
 
         restCall.DeleteProduct("DeleteProduct", productId, user_id)
                 .subscribeOn(Schedulers.io())
@@ -417,10 +439,14 @@ public class ProductAct extends AppCompatActivity {
                             @Override
                             public void run() {
                                 if (commonResponse.getStatus().equals(VeriableBag.SUCCESS_CODE)) {
-                                    getCategories();
+                                    if (productAdapter != null) {
+                                        productAdapter.clearData();
+                                    }
+                                    GetProduct(subCat_id);
+
                                     Toast.makeText(ProductAct.this, commonResponse.getMessage(), Toast.LENGTH_SHORT).show();
                                 } else {
-                                    Toast.makeText(ProductAct.this, "Not able to Delete", Toast.LENGTH_SHORT).show();
+//                                    Toast.makeText(ProductAct.this, "Not able to Delete", Toast.LENGTH_SHORT).show();
                                 }
                             }
                         });

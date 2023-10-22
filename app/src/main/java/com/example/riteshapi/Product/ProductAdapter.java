@@ -5,7 +5,6 @@ import android.graphics.PorterDuff;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -64,7 +63,8 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductD
         }
 
         holder.txtName.setText(product.getProductName());
-        holder.txtPrice.setText(product.getProductPrice());
+        String priceWithRupee = "₹ " + product.getProductPrice();
+        holder.txtPrice.setText(priceWithRupee);
         holder.txtDesc.setText(product.getProductDesc());
 
         Glide.with(context)
@@ -96,8 +96,8 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductD
     public static class ProductDataViewHolder extends RecyclerView.ViewHolder {
 
         TextView txtName, txtPrice, txtDesc;
-        ImageButton btnDel, btnEdit;
-        ImageView imageViewProduct,vegNonVegIcon;
+
+        ImageView imageViewProduct,vegNonVegIcon,btnDel,btnEdit;
 
         public ProductDataViewHolder(@NonNull View itemView) {
             super(itemView);

@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="5dp"
     android:padding="5dp"
-    android:background="@color/background"
+    android:background="#B1A5A5"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <ImageView
@@ -18,23 +19,23 @@
 
     <ImageView
         android:id="@+id/ivProduct"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:layout_width="135dp"
+        android:layout_height="89dp"
         android:scaleType="fitXY"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
     <TextView
         android:id="@+id/tvProductName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ivSymbolIsVeg"
-        android:text="pav bhaji"
-        android:textColor="@color/white"
+        android:text="name"
+        android:textColor="@color/black"
         android:textStyle="bold"
         android:layout_marginStart="10dp"
         android:layout_marginTop="5dp"
-        android:textSize="12dp"/>
+        android:textSize="17dp"/>
     <TextView
         android:id="@+id/tvProductPrice"
         android:layout_width="wrap_content"
@@ -42,25 +43,24 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvProductName"
         android:text="120"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:textStyle="bold"
         android:layout_marginStart="10dp"
         android:layout_marginTop="5dp"
-        android:textSize="12dp"/>
+        android:textSize="14dp"/>
+
     <TextView
         android:id="@+id/tvProductDescription"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvProductPrice"
-        android:maxLines="3"
-        android:textColor="@color/white"
-        android:layout_marginEnd="90dp"
-        android:text="des....."
+        android:layout_width="241dp"
+        android:layout_height="0dp"
         android:layout_marginStart="10dp"
         android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp"
-        android:textSize="10dp"/>
+        android:maxLines="5"
+        android:text="des....."
+        android:textColor="@color/black"
+        android:textSize="12dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvProductPrice" />
     <View
         android:layout_width="match_parent"
         android:layout_height="2dp"

@@ -37,7 +37,7 @@
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:backgroundTint="#B1A5A5"
-                    android:src="@drawable/baseline_mode_edit_24"
+                    android:src="@drawable/baseline_camera_alt_24"
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentTop="true"
                     android:layout_marginTop="15dp"

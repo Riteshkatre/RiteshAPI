@@ -92,6 +92,7 @@ public class AddProductActivity extends AppCompatActivity {
             productImage = getIntent().getStringExtra("getProductImage");
             product_isVeg = getIntent().getStringExtra("getIsVeg");
 
+
             switchVegNonVeg.setChecked(product_isVeg != null && product_isVeg.equals("1"));
 
             Glide .with(this)
@@ -102,6 +103,7 @@ public class AddProductActivity extends AppCompatActivity {
             editTextName.setText(productName);
             editTextPrice.setText(productPrice);
             editTextDesc.setText(productDes);
+
 
             isEditMode = true;
         }else{

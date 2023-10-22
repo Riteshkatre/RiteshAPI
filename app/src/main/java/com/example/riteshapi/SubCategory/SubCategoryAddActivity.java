@@ -1,6 +1,5 @@
 package com.example.riteshapi.SubCategory;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -33,7 +32,7 @@ public class SubCategoryAddActivity extends AppCompatActivity {
     Button btnaddsubdata;
     AppCompatSpinner spinneradd;
 
-    String selectedCategoryId,selectedSubCategoryId,selectedCategoryName;
+    String selectedCategoryId,selectedSubCategoryId,selectedSubCategoryName;
     SharedPreference sharedPreference;
 
     int selectedPos = 0;
@@ -59,9 +58,10 @@ public class SubCategoryAddActivity extends AppCompatActivity {
             isEdit = true;
             selectedCategoryId = bundle.getString("category_id");
             selectedSubCategoryId = bundle.getString("sub_category_id");
-            selectedCategoryName = bundle.getString("subCategoryName");
+            selectedSubCategoryName = bundle.getString("subCategoryName");
 
-            edtsubname.setText(selectedCategoryName);
+            edtsubname.setText(selectedSubCategoryName);
+
             btnaddsubdata.setText("Edit");
         } else {
             isEdit = false;
@@ -80,6 +80,7 @@ public class SubCategoryAddActivity extends AppCompatActivity {
                 } else {
                     if (isEdit) {
                         editSubCategoryCall();
+                        finish();
                     } else {
                         AddSubCategory(selectedCategoryId, edtsubname.getText().toString().trim());
                     }
@@ -89,6 +90,8 @@ public class SubCategoryAddActivity extends AppCompatActivity {
 
 
     }
+
+
 
     public void AddSubCategory(String category_id,String subcategory_name) {
         restCall.AddSubCategory("AddSubCategory",category_id,subcategory_name,sharedPreference.getStringvalue("user_id"))
@@ -158,9 +161,10 @@ public class SubCategoryAddActivity extends AppCompatActivity {
                                 Toast.makeText(SubCategoryAddActivity.this, "Select Category to Edit", Toast.LENGTH_SHORT).show();
                                 if (subCategoryListResponse.getStatus().equalsIgnoreCase(VeriableBag.SUCCESS_CODE)) {
                                     edtsubname.setText("");
-
-                                    startActivity(new Intent(SubCategoryAddActivity.this, SubCategoryActivity.class));
                                     finish();
+
+//                                    startActivity(new Intent(SubCategoryAddActivity.this, SubCategoryActivity.class));
+
                                 } else {
                                     Toast.makeText(SubCategoryAddActivity.this, subCategoryListResponse.getMessage(), Toast.LENGTH_SHORT).show();
                                 }

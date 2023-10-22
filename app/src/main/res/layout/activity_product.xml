@@ -8,20 +8,6 @@
     tools:context=".Product.ProductAct"
     android:background="@color/dark_blue">
 
-
-<androidx.cardview.widget.CardView
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="10dp"
-    android:layout_marginLeft="10dp"
-    android:layout_marginRight="10dp"
-    android:backgroundTint="#B1A5A5">
-    <androidx.appcompat.widget.AppCompatSpinner
-        android:id="@+id/spinner_category"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:visibility="visible" />
-</androidx.cardview.widget.CardView>
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -29,15 +15,25 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:backgroundTint="#B1A5A5">
-
-    <androidx.appcompat.widget.AppCompatSpinner
-        android:id="@+id/spinner_subcategory"
+        <androidx.appcompat.widget.AppCompatSpinner
+            android:id="@+id/spinner_category"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="visible" />
+    </androidx.cardview.widget.CardView>
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="visible"
-/>
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:backgroundTint="#B1A5A5">
+        <androidx.appcompat.widget.AppCompatSpinner
+            android:id="@+id/spinner_subcategory"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="visible" />
     </androidx.cardview.widget.CardView>
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -51,16 +47,13 @@
             android:elevation="10dp"
             app:cardCornerRadius="20dp"
             android:backgroundTint="#B1A5A5">
-
             <ImageView
                 android:id="@+id/imgSearch"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/baseline_search_24"
                 android:layout_marginTop="13dp"
-                android:layout_marginLeft="10dp"
-
-                />
+                android:layout_marginLeft="10dp" />
             <EditText
                 android:id="@+id/searchbar"
                 android:layout_width="320dp"
@@ -77,31 +70,28 @@
                 android:cursorVisible="true"
                 android:paddingStart="5dp"
                 android:paddingEnd="5dp" />
-
         </androidx.cardview.widget.CardView>
-
-
     </LinearLayout>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_product_data"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipref"
         android:layout_width="match_parent"
-        android:layout_height="495dp"
-        android:layout_margin="10dp" />
-
-
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/btn_product_float"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginRight="30dp"
-            android:layout_marginLeft="300dp"
-            android:layout_marginBottom="30dp"
-            android:backgroundTint="#d6a511"
-            android:src="@drawable/baseline_add_24"
-            />
-
+        android:layout_height="0dp"
+        android:layout_weight="1">
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_product_data"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp" />
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btn_product_float"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="30dp"
+        android:layout_marginLeft="300dp"
+        android:layout_marginBottom="30dp"
+        android:backgroundTint="#d6a511"
+        android:src="@drawable/baseline_add_24" />
 </LinearLayout>

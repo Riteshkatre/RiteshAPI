@@ -1,5 +1,7 @@
 package com.example.riteshapi;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -64,20 +66,29 @@ public class HomePageActivity extends AppCompatActivity {
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                new AlertDialog.Builder(HomePageActivity.this)
+                        .setTitle("Logout")
+                        .setMessage("Are you sure you want to logout?")
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                // Clear or reset user-related preferences
+                                sharedPreference.setLoggedIn(false);
+                                sharedPreference.setUserId("");
 
-                // Clear or reset user-related preferences
-                sharedPreference.setLoggedIn(false);
-                sharedPreference.setUserId("");
-
-                // Redirect to the login screen
-                Intent intent = new Intent(HomePageActivity.this, RegistrationActivity.class);
-                // Set the FLAG_ACTIVITY_NEW_TASK and FLAG_ACTIVITY_CLEAR_TASK flags to clear the back stack
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                startActivity(intent);
-                finish();
-
+                                // Redirect to the login screen
+                                Intent intent = new Intent(HomePageActivity.this, RegistrationActivity.class);
+                                // Set the FLAG_ACTIVITY_NEW_TASK and FLAG_ACTIVITY_CLEAR_TASK flags to clear the back stack
+                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                startActivity(intent);
+                                finish();
+                            }
+                        })
+                        .setNegativeButton("No", null)
+                        .show();
             }
         });
+
         productlist.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -86,5 +97,21 @@ public class HomePageActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        new AlertDialog.Builder(this)
+                .setTitle("Alert !!")
+                .setMessage("Are you sure you want to exit this App ")
+                .setCancelable(false)
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        finish();
+                    }
+                })
+                .setNegativeButton("CANCEL",null)
+                .show();
     }
 }
