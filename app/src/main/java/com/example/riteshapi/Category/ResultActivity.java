@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -40,6 +41,7 @@ public class ResultActivity extends AppCompatActivity {
     RcvAdapter rcvadapter;
     RestCall restCall2;
     RestCall restCall;
+    ImageView cross,imgSearch;
     SwipeRefreshLayout swap;
     SharedPreference sharedPreference;
     RcvAdapter.CategoryClick categoryClick;
@@ -53,6 +55,10 @@ public class ResultActivity extends AppCompatActivity {
         rcv=findViewById(R.id.rcv);
         btnpluse=findViewById(R.id.btnpluse);
         swap=findViewById(R.id.swap);
+        cross=findViewById(R.id.cross);
+        cross.setVisibility(View.GONE);
+        imgSearch=findViewById(R.id.imgSearch);
+        imgSearch.setVisibility(View.VISIBLE);
         rcv.setLayoutManager(new LinearLayoutManager(ResultActivity.this));
         rcvadapter = new RcvAdapter(ResultActivity.this,new ArrayList<>());
         rcv.setAdapter(rcvadapter);
@@ -65,8 +71,10 @@ public class ResultActivity extends AppCompatActivity {
             public void onFocusChange(View v, boolean hasFocus) {
                 if (hasFocus) {
                     searchbar.setHint(null);
+                    imgSearch.setVisibility(View.GONE);
                 } else {
                     searchbar.setHint("Search Name Here");
+                    imgSearch.setVisibility(View.VISIBLE);
                 }
             }
         });
@@ -80,6 +88,14 @@ public class ResultActivity extends AppCompatActivity {
                 GetCatogary();
             }
         });
+        cross.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                searchbar.setText(""); // Clear the EditText text
+                cross.setVisibility(View.GONE); // Hide the cross button
+            }
+        });
+
 
 
 
@@ -94,10 +110,17 @@ public class ResultActivity extends AppCompatActivity {
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 rcvadapter.Search(charSequence,rcv);
 
+
             }
 
             @Override
             public void afterTextChanged(Editable editable) {
+                if (editable.toString().isEmpty()) {
+                    cross.setVisibility(View.GONE);
+                } else {
+                    cross.setVisibility(View.VISIBLE);
+                   // Show the cross button when there's text
+                }
 
             }
         });

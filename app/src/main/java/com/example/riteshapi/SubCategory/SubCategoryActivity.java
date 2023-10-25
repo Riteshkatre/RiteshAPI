@@ -11,6 +11,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
@@ -40,6 +41,7 @@ import rx.schedulers.Schedulers;
 public class SubCategoryActivity extends AppCompatActivity {
 
     EditText subsearchbar;
+    ImageView cross;
     AppCompatSpinner subspinnerDropdown;
     RecyclerView subrcv;
     Button subbtnpluse;
@@ -61,6 +63,9 @@ public class SubCategoryActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sub_category);
         subbtnpluse=findViewById(R.id.subbtnpluse);
         subrcv=findViewById(R.id.subrcv);
+
+        cross=findViewById(R.id.cross);
+        cross.setVisibility(View.GONE);
 
         subsearchbar=findViewById(R.id.subsearchbar);
         crs=findViewById(R.id.crs);
@@ -106,9 +111,24 @@ public class SubCategoryActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable editable) {
+                if (editable.toString().isEmpty()) {
+                    cross.setVisibility(View.GONE);
+                } else {
+                    cross.setVisibility(View.VISIBLE);
+                    // Show the cross button when there's text
+                }
+
 
             }
         });
+        cross.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                subsearchbar.setText(""); // Clear the EditText text
+                cross.setVisibility(View.GONE); // Hide the cross button
+            }
+        });
+
 
 
     }

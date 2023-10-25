@@ -55,6 +55,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="20dp"
+                android:inputType="text"
+                android:maxLength="50"
+                android:imeOptions="actionDone"
                 android:hint="Enter the Sub-Category Name " />
         </androidx.cardview.widget.CardView>
 

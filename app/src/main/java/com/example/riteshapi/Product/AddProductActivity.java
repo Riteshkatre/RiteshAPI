@@ -130,6 +130,8 @@ public class AddProductActivity extends AppCompatActivity {
                     editTextDesc.requestFocus();
                 }else {
                     restCall = RestClient.createService(RestCall.class, VeriableBag.BASE_URL, VeriableBag.API_KEY);
+                    product_isVeg = switchVegNonVeg.isChecked() ? "1" : "0";
+
 
                     if(isEditMode == true){
                         ProductEdit();

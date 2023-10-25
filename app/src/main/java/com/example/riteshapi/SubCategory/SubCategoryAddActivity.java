@@ -61,6 +61,7 @@ public class SubCategoryAddActivity extends AppCompatActivity {
             selectedSubCategoryName = bundle.getString("subCategoryName");
 
             edtsubname.setText(selectedSubCategoryName);
+            spinneradd.setVisibility(View.GONE);
 
             btnaddsubdata.setText("Edit");
         } else {
@@ -71,20 +72,21 @@ public class SubCategoryAddActivity extends AppCompatActivity {
         btnaddsubdata.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (selectedCategoryId == null || selectedCategoryId.equals("-1")) {
-                    // No valid category selected
-                    Toast.makeText(SubCategoryAddActivity.this, "Please select a category.", Toast.LENGTH_SHORT).show();
-                } else if (edtsubname != null && edtsubname.getText().toString().trim().isEmpty()) {
-                    edtsubname.setError("Enter Sub-Category Name");
-                    edtsubname.requestFocus();
-                } else {
+
                     if (isEdit) {
                         editSubCategoryCall();
                         finish();
                     } else {
-                        AddSubCategory(selectedCategoryId, edtsubname.getText().toString().trim());
-                    }
-                }
+                        if (selectedCategoryId == null || selectedCategoryId.equals("-1")) {
+                            // No valid category selected
+                            Toast.makeText(SubCategoryAddActivity.this, "Please select a category.", Toast.LENGTH_SHORT).show();
+                        } else if (edtsubname != null && edtsubname.getText().toString().trim().isEmpty()) {
+                            edtsubname.setError("Enter Sub-Category Name");
+                            edtsubname.requestFocus();
+                        } else {
+                            AddSubCategory(selectedCategoryId, edtsubname.getText().toString().trim());
+                        }                    }
+
             }
         });
 

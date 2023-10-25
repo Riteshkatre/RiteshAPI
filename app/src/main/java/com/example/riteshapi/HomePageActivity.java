@@ -36,7 +36,7 @@ public class HomePageActivity extends AppCompatActivity {
 
         userNameTextView = findViewById(R.id.userNameTextView);
 
-        userNameTextView.setText(sharedPreference.getStringvalue("first_name")+".......");
+        userNameTextView.setText(sharedPreference.getStringvalue("first_name")+"...");
 
 
         category.setOnClickListener(new View.OnClickListener() {

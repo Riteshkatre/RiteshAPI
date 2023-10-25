@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -46,7 +47,7 @@ public class ProductAct extends AppCompatActivity {
     RestCall restCall;
     EditText searchbar;
     CardView pcv;
-
+    ImageView cross;
     ProductAdapter productAdapter;
     SharedPreference preferenceManger;
     String user_id, category_Id, subCat_id, product_id,subCategoryID,productId;
@@ -67,6 +68,10 @@ public class ProductAct extends AppCompatActivity {
         rvProduct = findViewById(R.id.rv_product_data);
         searchbar=findViewById(R.id.searchbar);
         swipref=findViewById(R.id.swipref);
+
+
+        cross=findViewById(R.id.cross);
+        cross.setVisibility(View.GONE);
 
         sub_Category_name = new ArrayList<>();
         sub_Category_id = new ArrayList<>();
@@ -123,8 +128,23 @@ public class ProductAct extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable editable) {
 
+                if (editable.toString().isEmpty()) {
+                    cross.setVisibility(View.GONE);
+                } else {
+                    cross.setVisibility(View.VISIBLE);
+                    // Show the cross button when there's text
+                }
+
             }
         });
+        cross.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                searchbar.setText(""); // Clear the EditText text
+                cross.setVisibility(View.GONE); // Hide the cross button
+            }
+        });
+
 
 
     }
